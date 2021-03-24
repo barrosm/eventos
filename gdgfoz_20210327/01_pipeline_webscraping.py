@@ -14,7 +14,7 @@ site = requests.get(url)
 # OUTPUT: 200
 
 # Faço o parsing do conteúdo com BeautifulSoup
-content = bs(site.content, 'html.parser')
+content = bs(site.content, "html.parser")
 
 # print(content)
 # OUTPUT: código-fonte do site
@@ -29,7 +29,7 @@ content = bs(site.content, 'html.parser')
 # aninhadas em <ul class="list-compromissos">...</ul>. Posso, então, descartar
 # todo o restante do site.
 
-lista = content.find('ul', class_='list-compromissos')
+lista = content.find("ul", class_="list-compromissos")
 
 # print(lista)
 # OUTPUT: código-fonte do elemento <ul>
@@ -50,23 +50,18 @@ lista = content.find('ul', class_='list-compromissos')
 # 4. local: <div class="compromisso-local">
 
 # Encontro todos os <li class="item-compromisso-wrapper">
-itens = lista.find_all('li', class_='item-compromisso-wrapper')
+itens = lista.find_all("li", class_="item-compromisso-wrapper")
 
 # Itero sobre os elementos <li class="item-compromisso-wrapper">
 # e guardo as informações que desejo
 for i in itens:
-    inicio = i.find('time', class_="compromisso-inicio").text
-    fim = i.find('time', class_="compromisso-fim").text
-    compromisso = i.find('h4', class_="compromisso-titulo").text
-    local = i.find('div', class_="compromisso-local").text
+    inicio = i.find("time", class_="compromisso-inicio").text
+    fim = i.find("time", class_="compromisso-fim").text
+    compromisso = i.find("h4", class_="compromisso-titulo").text
+    local = i.find("div", class_="compromisso-local").text
     # Salvo os dados num dict
-    dicionario = dict(
-        inicio=inicio,
-        fim=fim,
-        compromisso=compromisso,
-        local=local
-    )
-    # print(dicionario)
+    dicionario = dict(inicio=inicio, fim=fim, compromisso=compromisso, local=local)
+    print(dicionario)
     # OUTPUT: dict com os dados
     # {'inicio': '10h40', 'fim': '11h10', 'compromisso': 'Braga Netto,
     # Ministro-Chefe da Casa Civil da Presidência da República', 'local':
